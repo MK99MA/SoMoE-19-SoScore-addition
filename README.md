@@ -46,7 +46,7 @@ Adding this to your server will allow you to automatically update the plugin whe
  ● (OPTIONAL) Download soccer skins  
  [>>Default skins download<< if you need them](https://github.com/MK99MA/soccermod-2019edit/raw/master/skins/termi/termi_models.zip)  
  [>Alternate skins download<](https://github.com/MK99MA/soccermod-2019edit/tree/master/skins#alternative-skins-screenshots-below)  
-### If you are using alternate skins make sure to edit /sm_soccer/soccer__skins.cfg AND /sm_soccer/soccer_downloads.cfg!! Follow [this](https://github.com/MK99MA/soccermod-2019edit/tree/master/skins/EXAMPLE_soccer_mod_skins.cfg) and [this](https://github.com/MK99MA/soccermod-2019edit/blob/master/skins/EXAMPLE_soccer_mod_downloads.cfg) for example files.  
+### If you are using alternate skins make sure to edit cfg/sm_soccer/soccer__skins.cfg AND cfg/sm_soccer/soccer_downloads.cfg!! Follow [this](https://github.com/MK99MA/soccermod-2019edit/tree/master/skins/EXAMPLE_soccer_mod_skins.cfg) and [this](https://github.com/MK99MA/soccermod-2019edit/blob/master/skins/EXAMPLE_soccer_mod_downloads.cfg) for example files.  
 
 ● (OPTIONAL) AFK-Kicker  
 A customizable AFK-Kicker plugin can be found [here](https://forums.alliedmods.net/showthread.php?p=708265)  
