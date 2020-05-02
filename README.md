@@ -9,7 +9,7 @@ I'm still new to the whole Sourcemod stuff, so just expect heavily improvable co
   ● Skins management (Add them to the downloadlists, GK skins)   
   ● Minor admin functionality (Change Map, "Referee")  
   ● DeadChat options  
-  ● Misc stuff  
+  ● Misc stuff (Remove Ragdolls on death, turn off damage sounds)    
   
 ## Credits:
 I incorporated parts of the following plugins and only modified them partially to my needs or in a way so they would fit all into one plugin file. Therefore almost all credit should go to:  
