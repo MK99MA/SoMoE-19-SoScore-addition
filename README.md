@@ -51,7 +51,7 @@ Adding this to your server will allow you to automatically update the plugin whe
 ● (OPTIONAL) AFK-Kicker  
 A customizable AFK-Kicker plugin can be found [here](https://forums.alliedmods.net/showthread.php?p=708265)  
 
-● (OPTIONAL) Duckjump Blocker
+● (OPTIONAL) Duckjump Blocker  
 [Duckjumpblock by Marco Boogers](https://github.com/MK99MA/SoMoE-19-SoScore-addition/blob/master/addons/sourcemod/plugins/duckjumpblocker.smx)
   
 ### 2. Extract the zip files
