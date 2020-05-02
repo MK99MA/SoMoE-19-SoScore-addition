@@ -10,8 +10,6 @@ I'm still new to the whole Sourcemod stuff, so just expect heavily improvable co
   ● Minor admin functionality (Change Map, "Referee")  
   ● DeadChat options  
   ● Misc stuff  
-
-## [>>DOWNLOAD<< Please still read all the information below]()  
   
 ## Credits:
 I incorporated parts of the following plugins and only modified them partially to my needs or in a way so they would fit all into one plugin file. Therefore almost all credit should go to:  
