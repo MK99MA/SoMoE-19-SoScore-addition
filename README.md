@@ -16,9 +16,12 @@ I incorporated parts of the following plugins and only modified them partially t
   ● Original version by Marco Boogers - https://github.com/marcoboogers/soccermod  
   ● Allchat (aka DeadChat) by Frenzzy - https://forums.alliedmods.net/showthread.php?t=171734  
   ● ShortSprint by walmar - https://forums.alliedmods.net/showthread.php?p=2294299  
+  ● Advertisements by DJ Tsunami - https://forums.alliedmods.net/showthread.php?p=592536  
   Not included in soccer_mod.smx but relied on:  
   ● Updater by GoD-Tony - https://forums.alliedmods.net/showthread.php?t=169095  
-  
+
+## If you like their features please try the original versions too.  
+
 ## Installation
 ### 1. Download the required plugins  
 Click the links and select the correct download for your server (Linux or Windows). Save the zip files in the same location, for example on your desktop.  
