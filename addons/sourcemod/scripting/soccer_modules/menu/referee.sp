@@ -16,7 +16,7 @@ public void RefereeEventPlayerSpawn(Event event)
 	if (PlayerHasCard(clientSteamid, "red"))
 	{
 		ChangeClientTeam(client, 1);
-		PrintToChat(client, "[%s] You have been put to spectator because you have a red card", prefix);
+		CPrintToChat(client, "{%s}[%s] You have been put to spectator because you have a red card", prefixcolor, prefix);
 	}
 }
 
@@ -102,7 +102,7 @@ public void OpenRefereeYellowCardMenu(int client)
 	}
 	else
 	{
-		PrintToChat(client, "[%s] All players already have a red card", prefix);
+		CPrintToChat(client, "{%s}[%s] All players already have a red card", prefixcolor, prefix);
 		OpenRefereeMenu(client);
 	}
 }
@@ -140,7 +140,7 @@ public int RefereeYellowCardMenuHandler(Menu menu, MenuAction action, int client
 
 				for (int player = 1; player <= MaxClients; player++)
 				{
-					if (IsClientInGame(player) && IsClientConnected(player)) PrintToChat(player, "[%s] %N has given a second yellow card to %N", prefix, client, target);
+					if (IsClientInGame(player) && IsClientConnected(player)) CPrintToChat(player, "{%s}[%s] {%s}%N has given a second yellow card to %N", prefixcolor, prefix, textcolor, client, target);
 				}
 
 			}
@@ -151,7 +151,7 @@ public int RefereeYellowCardMenuHandler(Menu menu, MenuAction action, int client
 
 				for (int player = 1; player <= MaxClients; player++)
 				{
-					if (IsClientInGame(player) && IsClientConnected(player)) PrintToChat(player, "[%s] %N has given a yellow card to %N", prefix, client, target);
+					if (IsClientInGame(player) && IsClientConnected(player)) CPrintToChat(player, "{%s}[%s] {%s}%N has given a yellow card to %N", prefixcolor, prefix, textcolor, client, target);
 				}
 			}
 
@@ -159,7 +159,7 @@ public int RefereeYellowCardMenuHandler(Menu menu, MenuAction action, int client
 			keygroup.ExportToFile(pathRefCardsFile);
 			keygroup.Close();
 		}
-		else PrintToChat(client, "[%s] Player is no longer on the server", prefix);
+		else CPrintToChat(client, "{%s}[%s] Player is no longer on the server", prefixcolor, prefix);
 
 		OpenRefereeMenu(client);
 	}
@@ -210,7 +210,7 @@ public void OpenRefereeRedCardMenu(int client)
 	}
 	else
 	{
-		PrintToChat(client, "[%s] All players already have a red card", prefix);
+		CPrintToChat(client, "{%s}[%s] All players already have a red card", prefixcolor, prefix);
 		OpenRefereeMenu(client);
 	}
 }
@@ -248,10 +248,10 @@ public int RefereeRedCardMenuHandler(Menu menu, MenuAction action, int client, i
 
 				for (int player = 1; player <= MaxClients; player++)
 				{
-					if (IsClientInGame(player) && IsClientConnected(player)) PrintToChat(player, "[%s] %N has given a red card to %N", prefix, client, target);
+					if (IsClientInGame(player) && IsClientConnected(player)) CPrintToChat(player, "{%s}[%s] {%s}%N has given a red card to %N", prefixcolor, prefix, textcolor, client, target);
 				}
 			}
-			else PrintToChat(client, "[%s] Player already has a red card", prefix);
+			else CPrintToChat(client, "{%s}[%s] Player already has a red card", prefixcolor, prefix);
 
 			keygroup.Rewind();
 			keygroup.ExportToFile(pathRefCardsFile);
@@ -261,7 +261,7 @@ public int RefereeRedCardMenuHandler(Menu menu, MenuAction action, int client, i
 		}
 		else 
 		{
-			PrintToChat(client, "[%s] Player is no longer on the server", prefix);
+			CPrintToChat(client, "{%s}[%s] Player is no longer on the server", prefixcolor, prefix);
 			OpenRefereeMenu(client);
 		}
 	}
@@ -308,7 +308,7 @@ public void OpenRemoveYellowCardMenu(int client)
 	}
 	else
 	{
-		PrintToChat(client, "[%s] There are no players with a yellow card", prefix);
+		CPrintToChat(client, "{%s}[%s] There are no players with a yellow card", prefixcolor, prefix);
 		OpenRefereeMenu(client);
 	}
 }
@@ -337,7 +337,7 @@ public int RemoveYellowCardMenuHandler(Menu menu, MenuAction action, int client,
 
 			for (int player = 1; player <= MaxClients; player++)
 			{
-				if (IsClientInGame(player) && IsClientConnected(player)) PrintToChat(player, "[%s] %N has removed the yellow card from %s", prefix, client, playerName);
+				if (IsClientInGame(player) && IsClientConnected(player)) CPrintToChat(player, "{%s}[%s] {%s}%N has removed the yellow card from %s", prefixcolor, prefix, textcolor, client, playerName);
 			}
 
 			keygroup.SetNum("yellow", 0);
@@ -348,7 +348,7 @@ public int RemoveYellowCardMenuHandler(Menu menu, MenuAction action, int client,
 			
 			OpenRemoveYellowCardMenu(client);
 		}
-		else PrintToChat(client, "[%s] Yellow card already removed", prefix);
+		else CPrintToChat(client, "{%s}[%s] Yellow card already removed", prefixcolor, prefix);
 
 		keygroup.Close();
 
@@ -397,7 +397,7 @@ public void OpenRemoveRedCardMenu(int client)
 	}
 	else
 	{
-		PrintToChat(client, "[%s] There are no players with a red card", prefix);
+		CPrintToChat(client, "{%s}[%s] There are no players with a red card", prefixcolor, prefix);
 		OpenRefereeMenu(client);
 	}
 }
@@ -426,7 +426,7 @@ public int RemoveRedCardMenuHandler(Menu menu, MenuAction action, int client, in
 
 			for (int player = 1; player <= MaxClients; player++)
 			{
-				if (IsClientInGame(player) && IsClientConnected(player)) PrintToChat(player, "[%s] %N has removed the red card from %s", prefix, client, playerName);
+				if (IsClientInGame(player) && IsClientConnected(player)) CPrintToChat(player, "{%s}[%s] {%s}%N has removed the red card from %s", prefixcolor, prefix, textcolor, client, playerName);
 			}
 
 			keygroup.SetNum("yellow", 0);
@@ -438,7 +438,7 @@ public int RemoveRedCardMenuHandler(Menu menu, MenuAction action, int client, in
 			
 			OpenRemoveRedCardMenu(client);
 		}
-		else PrintToChat(client, "[%s]Red card already removed", prefix);
+		else CPrintToChat(client, "{%s}[%s] Red card already removed", prefixcolor, prefix);
 
 		keygroup.Close();
 
@@ -469,7 +469,7 @@ public void RemoveAllCards(int client)
 
 	for (int player = 1; player <= MaxClients; player++)
 	{
-		if (IsClientInGame(player) && IsClientConnected(player)) PrintToChat(player, "[%s] %N has removed all cards", prefix, client);
+		if (IsClientInGame(player) && IsClientConnected(player)) CPrintToChat(player, "{%s}[%s] {%s}%N has removed all cards", prefixcolor, prefix, textcolor, client);
 	}
 
 	char clientSteamid[32];

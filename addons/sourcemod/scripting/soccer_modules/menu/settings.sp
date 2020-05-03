@@ -19,7 +19,7 @@ public void OpenMenuSettings(int client)
 	Handle shoutplugin = FindPluginByFile("shout.smx");	
 
 	menu.AddItem("allowed", "Allowed Maps");
-	menu.AddItem("chatset", "Deadchat Settings");
+	menu.AddItem("chatset", "Chat Settings");
 	menu.AddItem("skinsmenu", "Skins");
 	menu.AddItem("damagesound", DamageString);
 	menu.AddItem("dissolve", DissolveString);
@@ -39,7 +39,7 @@ public int MenuHandlerSettings(Menu menu, MenuAction action, int client, int cho
 		char menuItem[32];
 		menu.GetItem(choice, menuItem, sizeof(menuItem));
 
-		if (StrEqual(menuItem, "chatset"))				OpenMenuDeadChat(client);
+		if (StrEqual(menuItem, "chatset"))				OpenMenuChat(client);
 		else if (StrEqual(menuItem, "skinsmenu"))		OpenSkinsMenu(client);
 		else if (StrEqual(menuItem, "shoutplug"))		FakeClientCommandEx(client, "sm_shoutset");
 		else if (StrEqual(menuItem, "allowed"))			OpenMenuMaps(client);

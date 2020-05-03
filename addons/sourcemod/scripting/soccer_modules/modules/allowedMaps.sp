@@ -146,13 +146,13 @@ public int MenuHandlerMapsAdd(Menu menu, MenuAction action, int client, int choi
 		char map[128];
 		menu.GetItem(choice, map, sizeof(map));
 
-		if (FindStringInArray(allowedMaps, map) > -1) PrintToChat(client, "[%s] %s is already added to the allowed maps list.", prefix, map);
+		if (FindStringInArray(allowedMaps, map) > -1) CPrintToChat(client, "{%s}[%s] {%s}%s is already added to the allowed maps list.", prefixcolor, prefix, textcolor, map);
 		else
 		{
 			PushArrayString(allowedMaps, map);
 			SaveAllowedMaps();
 
-			PrintToChat(client, "[%s] %s added to the allowed maps list.", prefix, map);
+			CPrintToChat(client, "{%s}[%s] {%s}%s added to the allowed maps list.", prefixcolor, prefix, textcolor, map);
 		}
 
 		OpenMenuMaps(client);
@@ -191,7 +191,7 @@ public void OpenMenuMapsRemove(int client)
 	}
 	else
 	{
-		PrintToChat(client, "[%s] Allowed maps list is empty.", prefix);
+		CPrintToChat(client, "{%s}[%s] {%s}Allowed maps list is empty.", prefixcolor, prefix, textcolor);
 		OpenMenuMaps(client);
 	}
 }
@@ -210,9 +210,9 @@ public int MenuHandlerMapsRemove(Menu menu, MenuAction action, int client, int c
 			SaveAllowedMaps();
 			LoadAllowedMaps();
 
-			PrintToChat(client, "[%s] %s removed from the allowed maps list.", prefix, map);
+			CPrintToChat(client, "{%s}[%s] {%s}%s removed from the allowed maps list.", prefixcolor, prefix, textcolor, map);
 		}
-		else PrintToChat(client, "[%s] %s is already removed from the allowed maps list.", prefix, map);
+		else CPrintToChat(client, "{%s}[%s] {%s}%s is already removed from the allowed maps list.", prefixcolor, prefix, textcolor, map);
 
 		OpenMenuMaps(client);
 	}

@@ -4,9 +4,9 @@
 #define CLIENT_ANNOUNCEMENT  (1<<3)
 
 //INCLUDES
-#include "soccer_modules\sprint\clientsettings.sp"
-#include "soccer_modules\sprint\infopanel.sp"
-#include "soccer_modules\sprint\timers.sp"
+#include "soccer_modules\modules\sprint\clientsettings.sp"
+#include "soccer_modules\modules\sprint\infopanel.sp"
+#include "soccer_modules\modules\sprint\timers.sp"
 
 
 public void OnPluginEnd()
@@ -20,6 +20,7 @@ public void SprintOnPluginStart()
 {
 	//Commands
 	RegConsoleCmd("sm_sprint", Command_StartSprint, "Starts the sprint.");
+	RegConsoleCmd("sprint", Command_StartSprint, "Starts the sprint.");
 
 	floodcheck();
 	//Clientprefs
@@ -82,7 +83,7 @@ public Action Command_StartSprint(int client, int args)
 
 			if(iP_SETTINGS[client] & PLAYER_MESSAGES)
 			{
-				PrintToChat(client, "[%s] You are using sprint!", prefix);
+				CPrintToChat(client, "{%s}[%s] You are using sprint!", prefixcolor, prefix);
 
 				iCLIENT_STATUS[client] |= CLIENT_MESSAGEUSING;
 			}
@@ -101,7 +102,7 @@ public Action Command_StartSprint(int client, int args)
 
 			h_SPRINT_TIMERS[client] = CreateTimer(fSPRINT_TIME, Timer_SprintEnd, client);
 		}
-		else PrintToChat(client, "[%s] Can't sprint while editing your settings!", prefix);
+		else CPrintToChat(client, "{%s}[%s] Can't sprint while editing your settings!", prefixcolor, prefix);
 	}
 	return(Plugin_Handled);
 }
@@ -212,7 +213,7 @@ public void PrintSprintEndMsgToClient(int client)
 {
 	if(iCLIENT_STATUS[client] & CLIENT_MESSAGEUSING)
 	{
-		PrintToChat(client, "[%s] Sprint has ended", prefix);
+		CPrintToChat(client, "{%s}[%s] Sprint has ended", prefixcolor, prefix);
 	}
 	return;
 }
@@ -221,7 +222,7 @@ public void PrintSprintCDMsgToClient(int client)
 {
 	if(iCLIENT_STATUS[client] & CLIENT_MESSAGEUSING)
 	{
-		PrintToChat(client, "[%s] You can use sprint" ,prefix);
+		CPrintToChat(client, "{%s}[%s] You can use sprint", prefixcolor, prefix);
 		iCLIENT_STATUS[client] &= ~ CLIENT_MESSAGEUSING;
 	}
 	return;

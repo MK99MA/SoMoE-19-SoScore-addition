@@ -28,7 +28,7 @@ public int MenuHandlerHelp(Menu menu, MenuAction action, int client, int choice)
 		else if (StrEqual(menuItem, "sprint"))			  OpenMenuHelp(client);
 		else if (StrEqual(menuItem, "guide"))
 		{
-			PrintToChat(client, "{%s}[%s] {%s}http://steamcommunity.com/sharedfiles/filedetails/?id=267151106", prefix);
+			CPrintToChat(client, "{%s}[%s] {%s}http://steamcommunity.com/sharedfiles/filedetails/?id=267151106", prefixcolor, prefix, textcolor);
 			OpenMenuHelp(client);
 		}
 	}
@@ -44,10 +44,11 @@ public void OpenMenuCommands(int client)
 
 	menu.AddItem("menu", "!soccer");
 	menu.AddItem("gk", "!gk");
-	menu.AddItem("maprr", "!maprr");
+	if(CheckCommandAccess(client, "generic_admin", ADMFLAG_GENERIC)) menu.AddItem("maprr", "!maprr");
 	menu.AddItem("commands", "!commands");
 	menu.AddItem("adminlist", "!admins");
 	menu.AddItem("help", "!help");
+	if(CheckCommandAccess(client, "generic_admin", ADMFLAG_GENERIC)) menu.AddItem("reloadads", "!reloadads");
 
 	menu.ExitBackButton = true;
 	menu.Display(client, MENU_TIME_FOREVER);
@@ -60,12 +61,15 @@ public int MenuHandlerCommands(Menu menu, MenuAction action, int client, int cho
 		char menuItem[32];
 		menu.GetItem(choice, menuItem, sizeof(menuItem));
 
-		if (StrEqual(menuItem, "menu"))				PrintToChat(client, "[%s] Opens the Soccer main menu", prefix);
-		else if (StrEqual(menuItem, "help"))		PrintToChat(client, "[%s] Opens the Soccer help menu", prefix);
-		else if (StrEqual(menuItem, "gk"))		  	PrintToChat(client, "[%s] Enables or disables the goalkeeper skin", prefix);
-		else if (StrEqual(menuItem, "maprr"))		PrintToChat(client, "[%s] Reload the current map; Requires admin", prefix);
-		else if (StrEqual(menuItem, "commands"))	PrintToChat(client, "[%s] Opens the Soccer commands menu", prefix);
-		else if (StrEqual(menuItem, "adminlist"))	PrintToChat(client, "[%s] Shows the current online admins", prefix);
+		if (StrEqual(menuItem, "menu"))				CPrintToChat(client, "{%s}[%s] {%s}Opens the Soccer main menu", prefixcolor, prefix, textcolor);
+		else if (StrEqual(menuItem, "help"))		CPrintToChat(client, "{%s}[%s] {%s}Opens the Soccer help menu", prefixcolor, prefix, textcolor);
+		else if (StrEqual(menuItem, "gk"))		  	CPrintToChat(client, "{%s}[%s] {%s}Enables or disables the goalkeeper skin", prefixcolor, prefix, textcolor);
+		else if (StrEqual(menuItem, "maprr"))		CPrintToChat(client, "{%s}[%s] {%s}Reload the current map; Requires admin", prefixcolor, prefix, textcolor);
+		else if (StrEqual(menuItem, "commands"))	CPrintToChat(client, "{%s}[%s] {%s}Opens the Soccer commands menu", prefixcolor, prefix, textcolor);
+		else if (StrEqual(menuItem, "adminlist"))	CPrintToChat(client, "{%s}[%s] {%s}Shows the current online admins", prefixcolor, prefix, textcolor);
+		else if (StrEqual(menuItem, "adminlist"))	CPrintToChat(client, "{%s}[%s] {%s}Reloads the advertisements.", prefixcolor, prefix, textcolor);
+		
+		OpenMenuCommands(client);
 	}
 	else if (action == MenuAction_Cancel && choice == -6)   OpenMenuHelp(client);
 	else if (action == MenuAction_End)					  menu.Close();

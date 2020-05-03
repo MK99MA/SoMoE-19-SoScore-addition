@@ -4,12 +4,12 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.0"
+			"Latest"	"1.1.0"
 		}
 		
-		"Notes"	"Initial Release"
-		"Notes" ""
-		"Notes" ""
+		"Notes"	"Update & Fixes"
+		"Notes" "Added Rules command"
+		"Notes" "Added adverts"
 	}
 	
 	"Files"

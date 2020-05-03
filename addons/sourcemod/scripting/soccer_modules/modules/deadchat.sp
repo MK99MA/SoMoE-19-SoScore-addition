@@ -1,15 +1,10 @@
 public void OpenMenuDeadChat(int client)
 {
-	char currentDeadChatSet[64], currentDeadChatSet2[64], dcstate[32], dcvisstate[32];
-	if(DeadChatMode == 1) dcstate = "On";
-	else if(DeadChatMode == 0) dcstate = "Off";
-	else if(DeadChatMode == 2) dcstate = "Alltalk";
-	if(DeadChatVis == 1) dcvisstate = "Teammates";
-	else if(DeadChatVis == 0) dcvisstate = "Default";
-	else if(DeadChatVis == 2) dcvisstate = "Everyone";
-	
-	Format(currentDeadChatSet, sizeof(currentDeadChatSet), "DeadChat: %s ", dcstate);
-	Format(currentDeadChatSet2, sizeof(currentDeadChatSet2), "Visibility: %s", dcvisstate);
+	char dcvisstate[32];
+	if(DeadChatVis == 1) dcvisstate = "Visible to: Teammates";
+	else if(DeadChatVis == 0) dcvisstate = "Visible to: Default";
+	else if(DeadChatVis == 2) dcvisstate = "Visible to: Everyone";
+
 	Menu menu = new Menu(MenuHandlerDeadChat);
 	menu.SetTitle("Soccer - Admin - Deadchat Settings");
 
@@ -19,11 +14,8 @@ public void OpenMenuDeadChat(int client)
 
 	menu.AddItem("disable", "Disable");
 	
-	menu.AddItem("visibility", "Visibility");
+	menu.AddItem("visibility", dcvisstate);
 	
-	menu.AddItem("locknumber", currentDeadChatSet, ITEMDRAW_DISABLED);
-	menu.AddItem("locknumber", currentDeadChatSet2, ITEMDRAW_DISABLED);
-
 	menu.ExitBackButton = true;
 	menu.Display(client, MENU_TIME_FOREVER);
 }
@@ -39,21 +31,21 @@ public int MenuHandlerDeadChat(Menu menu, MenuAction action, int client, int cho
 		{
 			DeadChatMode = 1;
 			UpdateConfigInt("Chat Settings", "soccer_deadchat_mode", DeadChatMode);
-			PrintToChat(client, "[%s] Deadchat enabled.", prefix);
+			CPrintToChat(client, "{%s}[%s] {%s}Deadchat enabled.", prefixcolor, prefix, textcolor);
 			OpenMenuDeadChat(client);
 		}
 		else if (StrEqual(menuItem, "disable"))
 		{
 			DeadChatMode = 0;
 			UpdateConfigInt("Chat Settings", "soccer_deadchat_mode", DeadChatMode);
-			PrintToChat(client, "[%s] Deadchat disabled.", prefix);
+			CPrintToChat(client, "{%s}[%s] {%s}Deadchat disabled.", prefixcolor, prefix, textcolor);
 			OpenMenuDeadChat(client);
 		}
 		else if (StrEqual(menuItem, "alltalk"))
 		{
 			DeadChatMode = 2;
 			UpdateConfigInt("Chat Settings", "soccer_deadchat_mode", DeadChatMode);
-			PrintToChatAll("[%s] Deadchat enabled if sv_alltalk = 1.", prefix);
+			CPrintToChatAll("{%s}[%s] {%s}Deadchat enabled if sv_alltalk = 1.", prefixcolor, prefix, textcolor);
 			OpenMenuDeadChat(client);
 		}
 		else if (StrEqual(menuItem, "visibility"))
@@ -61,7 +53,7 @@ public int MenuHandlerDeadChat(Menu menu, MenuAction action, int client, int cho
 			OpenMenuDeadChatVis(client);
 		}
 	}
-	else if (action == MenuAction_Cancel && choice == -6)   OpenMenuSettings(client);
+	else if (action == MenuAction_Cancel && choice == -6)   OpenMenuChat(client);
 	else if (action == MenuAction_End)					  menu.Close();
 }
 
@@ -92,21 +84,21 @@ public int MenuHandlerDeadChatSetVis(Menu menu, MenuAction action, int client, i
 		{
 			DeadChatVis = 0;
 			UpdateConfigInt("Chat Settings", "soccer_deadchat_visibility", DeadChatVis);
-			PrintToChat(client, "[%s] Deadchat visibility set to default.", prefix);
+			CPrintToChat(client, "{%s}[%s] {%s}Deadchat visibility set to default.", prefixcolor, prefix, textcolor);
 			OpenMenuDeadChatVis(client);
 		}
 		else if (StrEqual(menuItem, "teammates"))
 		{
 			DeadChatVis = 1;
 			UpdateConfigInt("Chat Settings", "soccer_deadchat_visibility", DeadChatVis);
-			PrintToChat(client, "[%s] Deadchat visibility set to teammates.", prefix);
+			CPrintToChat(client, "{%s}[%s] {%s}Deadchat visibility set to teammates.", prefixcolor, prefix, textcolor);
 			OpenMenuDeadChatVis(client);
 		}
 		else if (StrEqual(menuItem, "everyone"))
 		{
 			DeadChatVis = 2;
 			UpdateConfigInt("Chat Settings", "soccer_deadchat_visibility", DeadChatVis);
-			PrintToChat(client, "[%s] Deadchat visibility set to everyone.", prefix);
+			CPrintToChat(client, "{%s}[%s] {%s}Deadchat visibility set to everyone.", prefixcolor, prefix, textcolor);
 			OpenMenuDeadChatVis(client);
 		}
 	}

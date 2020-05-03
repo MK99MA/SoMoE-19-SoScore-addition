@@ -1,7 +1,7 @@
 // **************************************************************************************************************
 // ************************************************** DEFINES ***************************************************
 // **************************************************************************************************************
-#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_VERSION "1.1.0"
 #define UPDATE_URL "https://raw.githubusercontent.com/MK99MA/SoMoE-19-SoScore-addition/master/addons/sourcemod/updatefile.txt"
 
 // **************************************************************************************************************
@@ -12,6 +12,7 @@
 #include <sdktools_functions>
 #include <sdkhooks>
 #include <cstrike>
+#include <morecolors>
 #include <clientprefs>
 #undef REQUIRE_PLUGIN
 #include <updater>
@@ -20,13 +21,17 @@
 
 #include "soccer_modules\globals.sp"
 #include "soccer_modules\commands.sp"
+#include "soccer_modules\chat_listener.sp"
 #include "soccer_modules\config.sp"
+#include "soccer_modules\colormenu.sp"
 #include "soccer_modules\menu.sp"
 #include "soccer_modules\misc_functions.sp"
-#include "soccer_modules\deadchat.sp"
-#include "soccer_modules\sprint.sp"
-#include "soccer_modules\skins.sp"
-#include "soccer_modules\allowedMaps.sp"
+#include "soccer_modules\modules\adverts.sp"
+#include "soccer_modules\modules\chat.sp"
+#include "soccer_modules\modules\deadchat.sp"
+#include "soccer_modules\modules\sprint.sp"
+#include "soccer_modules\modules\skins.sp"
+#include "soccer_modules\modules\allowedMaps.sp"
 
 // *****************************************************************************************************************
 // ************************************************** PLUGIN INFO **************************************************
@@ -51,6 +56,10 @@ public void OnPluginStart()
 	
 	AddNormalSoundHook(sound_hook);
 	
+	AddCommandListener(SayCommandListener, "say");
+	AddCommandListener(SayCommandListener, "say2");
+	AddCommandListener(SayCommandListener, "say_team");
+	
 	HookEvent("player_death",		   	EventPlayerDeath);
 	HookEvent("player_spawn",		   	EventPlayerSpawn);
 	
@@ -58,7 +67,8 @@ public void OnPluginStart()
 	ConfigFunc();
 	RegisterClientCommands();
 
-	DeadChatOnPluginStart()
+	AdvertsOnPluginStart();
+	DeadChatOnPluginStart();
 	RefereeOnPluginStart();
 	SkinsOnPluginStart();
 	RefereeOnPluginStart();
@@ -107,6 +117,7 @@ public void OnMapStart()
 	
 	LoadAllowedMaps();
 
+	AdvertsOnMapStart(); // Parse adverts & Start Timer
 	SkinsOnMapStart();
 	PrecacheSound("player/suit_sprint.wav");
 	if(bLATE_LOAD)

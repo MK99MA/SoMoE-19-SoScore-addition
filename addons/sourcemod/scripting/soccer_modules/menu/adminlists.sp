@@ -24,7 +24,7 @@ public void OpenMenuOnlineAdmin(int client)
 	}
 	if(onlinecount == 0) menu.AddItem("", "No Admins on the server", ITEMDRAW_DISABLED);
 	
-	if(menuaccessed == true) menu.ExitBackButton = true;
+	if(menuaccessed[client] == true) menu.ExitBackButton = true;
 	menu.Display(client, MENU_TIME_FOREVER);
 }
 

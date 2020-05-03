@@ -3,14 +3,18 @@ char configFileKV[PLATFORM_MAX_PATH] 					= "cfg/sm_soccer/soccer.cfg";
 char allowedMapsConfigFile[PLATFORM_MAX_PATH] 			= "cfg/sm_soccer/soccer_allowed_maps.cfg";
 char skinsKeygroup[PLATFORM_MAX_PATH] 					= "cfg/sm_soccer/soccer_skins.cfg";
 char pathRefCardsFile[PLATFORM_MAX_PATH] 				= "cfg/sm_soccer/soccer_referee_cards.txt";
+char rulesKV[PLATFORM_MAX_PATH]							= "cfg/sm_soccer/soccer_rules.txt";
+char advertsKV[PLATFORM_MAX_PATH]						= "cfg/sm_soccer/soccer_adverts.txt";
 
 // ************************************************** KEYVALUES *************************************************
 KeyValues kvConfig;
 KeyValues kvSkins;
+KeyValues kvRules;
+KeyValues kvAdverts;
 
 // **************************************************** GENERAL **************************************************
 // BOOLS
-bool menuaccessed 				= false;
+bool menuaccessed[MAXPLAYERS+1]	= false;
 bool bLATE_LOAD					= false;
 
 // FLOATS
@@ -24,6 +28,22 @@ int dissolveSet					= 2;
 
 // STRINGS
 char changeSetting[MAXPLAYERS + 1][32];
+char commandString[32]			= "menu"
+
+// **************************************************** ADVERTS **************************************************
+// BOOLS
+
+// FLOATS
+float advertInterval 			= 30.0;
+
+// HANDLES
+Handle advertTimer				= INVALID_HANDLE;
+
+// INTEGER
+int advertEnabled				= 0;
+
+// STRINGS
+
 
 // **************************************************** CHAT ****************************************************
 
@@ -43,10 +63,12 @@ int DeadChatVis			= 0;
 int g_msgAuthor;
 
 // STRINGS
+char prefix[32]			= "Soccer Mod";
+char prefixcolor[32]	= "green";
+char textcolor[32]		= "lightgreen";
 char g_msgType[64];
 char g_msgName[64];
 char g_msgText[64];
-char prefix[32]			= "Soccer"
 
 
 // **************************************************** SKINS ***************************************************

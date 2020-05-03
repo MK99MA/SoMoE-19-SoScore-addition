@@ -12,7 +12,7 @@ public void ClientCommandSetGoalkeeperSkin(int client)
 		if (team == 2 && FileExists(skinsModelT, true)) SetEntityModel(client, skinsModelT);
 		else if (team == 3 && FileExists(skinsModelCT, true)) SetEntityModel(client, skinsModelCT);
 
-		PrintToChat(client, "[%s] Goalkeeper skin disabled", prefix);
+		CPrintToChat(client, "{%s}[%s] Goalkeeper skin disabled", prefixcolor, prefix);
 	}
 	else
 	{
@@ -21,7 +21,7 @@ public void ClientCommandSetGoalkeeperSkin(int client)
 		if (team == 2 && FileExists(skinsModelTGoalkeeper, true)) SetEntityModel(client, skinsModelTGoalkeeper);
 		else if (team == 3 && FileExists(skinsModelCTGoalkeeper, true)) SetEntityModel(client, skinsModelCTGoalkeeper);
 
-		PrintToChat(client, "[%s] Goalkeeper skin enabled", prefix);
+		CPrintToChat(client, "{%s}[%s] Goalkeeper skin enabled", prefixcolor, prefix);
 	}
 }
 

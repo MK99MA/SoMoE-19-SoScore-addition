@@ -63,10 +63,10 @@ public void EnabledConVarChanged(Handle convar, char[] oldValue, char[] newValue
 	if(!bSPRINT_ENABLED)
 	{
 		bSPRINT_BUTTON = false;
-		PrintToChatAll("[%s]Sprint module was disabled!", prefix);
+		CPrintToChatAll("{%s}[%s]Sprint module was disabled!", prefixcolor, prefix);
 		return;
 	}
-	else PrintToChatAll("[%s]Sprint module was enabled!", prefix);
+	else CPrintToChatAll("{%s}[%s]Sprint module was enabled!", prefixcolor, prefix);
 
 	return;
 }
@@ -75,8 +75,8 @@ public void ButtonConVarChanged(Handle convar, char[] oldValue, char[] newValue)
 {
 	bSPRINT_BUTTON = GetConVarInt(h_BUTTON);
 	UpdateConfigInt("Sprint Settings", "soccer_mod_sprint_button", bSPRINT_BUTTON);
-	if(bSPRINT_BUTTON) PrintToChatAll("[%s]Sprinting with +use was enabled!", prefix);
-	else PrintToChatAll("[%s]Sprinting with +use was disabled!", prefix);
+	if(bSPRINT_BUTTON) CPrintToChatAll("{%s}[%s]Sprinting with +use was enabled!", prefixcolor, prefix);
+	else CPrintToChatAll("{%s}[%s]Sprinting with +use was disabled!", prefixcolor, prefix);
 	return;
 }
 
@@ -84,7 +84,7 @@ public void CooldownConVarChanged(Handle convar, char[] oldValue, char[] newValu
 {
 	fSPRINT_COOLDOWN = GetConVarFloat(h_COOLDOWN);
 	UpdateConfigFloat("Sprint Settings", "soccer_mod_sprint_cooldown", fSPRINT_COOLDOWN);
-	PrintToChatAll("[%s]Sprint cooldown was set to %f!", prefix, h_COOLDOWN);
+	CPrintToChatAll("{%s}[%s]Sprint cooldown was set to %f!", prefixcolor, prefix, h_COOLDOWN);
 	
 	return;
 }
@@ -93,7 +93,7 @@ public void SpeedConVarChanged(Handle convar, char[] oldValue, char[] newValue)
 {
 	fSPRINT_SPEED = GetConVarFloat(h_SPEED);
 	UpdateConfigFloat("Sprint Settings", "soccer_mod_sprint_speed", fSPRINT_SPEED);
-	PrintToChatAll("[%s]Sprint speed was changed to %f!", prefix, fSPRINT_SPEED);
+	CPrintToChatAll("{%s}[%s]Sprint speed was changed to %f!", prefixcolor, prefix, fSPRINT_SPEED);
 	return;
 }
 
@@ -101,6 +101,6 @@ public void TimeConVarChanged(Handle convar, char[] oldValue, char[] newValue)
 {
 	fSPRINT_TIME = GetConVarFloat(h_TIME);
 	UpdateConfigFloat("Sprint Settings", "soccer_mod_sprint_time", fSPRINT_TIME);
-	PrintToChatAll("[%s]Sprint cooldown was changed to %f!", prefix, fSPRINT_TIME);
+	CPrintToChatAll("{%s}[%s]Sprint cooldown was changed to %f!", prefixcolor, prefix, fSPRINT_TIME);
 	return;
 }

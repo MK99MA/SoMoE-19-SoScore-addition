@@ -31,7 +31,7 @@ public void OpenMenuSpecPlayer(int client)
 	}
 	else
 	{
-		PrintToChat(client, "[%s]All players already are in spectator", prefix);
+		CPrintToChat(client, "{%s}[%s] {%s}All players already are in spectator", prefixcolor, prefix, textcolor);
 		OpenMenuAdmin(client);
 	}
 }
@@ -52,7 +52,7 @@ public int MenuHandlerSpecPlayer(Menu menu, MenuAction action, int client, int c
 
 				for (int player = 1; player <= MaxClients; player++)
 				{
-					if (IsClientInGame(player) && IsClientConnected(player)) PrintToChat(player, "[%s]%N has put %N to spectator", prefix, client, target);
+					if (IsClientInGame(player) && IsClientConnected(player)) CPrintToChat(player, "{%s}[%s] [%s]%N has put %N to spectator", prefixcolor, prefix, textcolor, client, target);
 				}
 
 				char clientSteamid[32];
@@ -62,9 +62,9 @@ public int MenuHandlerSpecPlayer(Menu menu, MenuAction action, int client, int c
 				GetClientAuthId(target, AuthId_Engine, targetSteamid, sizeof(targetSteamid));
 
 			}
-			else PrintToChat(client, "[%s] Player is already in spectator", prefix);
+			else CPrintToChat(client, "{%s}[%s] {%s}Player is already in spectator", prefixcolor, prefix, textcolor);
 		}
-		else PrintToChat(client, "[%s] Player is no longer on the server", prefix);
+		else CPrintToChat(client, "{%s}[%s] {%s}Player is no longer on the server", prefixcolor, prefix, textcolor);
 
 		OpenMenuAdmin(client);
 	}

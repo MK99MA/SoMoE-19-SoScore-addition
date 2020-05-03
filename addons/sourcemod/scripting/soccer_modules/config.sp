@@ -8,8 +8,10 @@ public void ConfigFunc()
 	}
 	else AutoExecConfig(false, "soccer_downloads", "sm_soccer");
 	if (!FileExists(skinsKeygroup)) CreateSkinsConfig();
+	if (!FileExists(rulesKV))		CreateRules();
+	if (!FileExists(advertsKV))		CreateAdverts();
 	
-	if (FileExists(configFileKV)) ReadFromConfig();
+	if (FileExists(configFileKV)) 	ReadFromConfig();
 }
 
 public void CreateSoccerConfig()
@@ -20,14 +22,22 @@ public void CreateSoccerConfig()
 	kvConfig.ImportFromFile(configFileKV);
 
 	kvConfig.JumpToKey("Chat Settings", true);
+	kvConfig.SetString("soccer_prefix", 					prefix);
+	kvConfig.SetString("soccer_textcolor", 					textcolor);
+	kvConfig.SetString("soccer_prefixcolor", 				prefixcolor);
 	kvConfig.SetNum("soccer_deadchat_mode",					DeadChatMode);
 	kvConfig.SetNum("soccer_deadchat_visibility",			DeadChatVis);
-	kvConfig.SetString("soccer_chat_prefix",				prefix);
+	kvConfig.GoBack();
+	
+	kvConfig.JumpToKey("Adverts Settings", true);
+	kvConfig.SetNum("soccer_adverts_enabled",				advertEnabled);
+	kvConfig.SetFloat("soccer_adverts_interval",			advertInterval);
 	kvConfig.GoBack();
 	
 	kvConfig.JumpToKey("Misc Settings", true);
 	kvConfig.SetNum("soccer_damagesounds",					damageSounds);
 	kvConfig.SetNum("soccer_dissolver",						dissolveSet);
+	kvConfig.SetString("soccer_command",					commandString);
 	kvConfig.GoBack();
 	
 	kvConfig.JumpToKey("Sprint Settings", true);
@@ -48,6 +58,74 @@ public void CreateSoccerConfig()
 	kvConfig.Rewind();
 	kvConfig.ExportToFile(configFileKV);
 	kvConfig.Close();
+}
+
+public void CreateRules()
+{
+	File hFile = OpenFile(rulesKV, "w");
+	hFile.Close();
+	kvRules = new KeyValues("Rules");
+	kvRules.ImportFromFile(rulesKV);
+	kvRules.JumpToKey("rule1", true);
+	kvRules.SetString("rule",			"Follow this example to add rules.");
+	kvRules.GoBack();
+	
+	kvRules.JumpToKey("rule2", true);
+	kvRules.SetString("rule",			"Try to keep it short, 128 chars is the limit per rule/line. But they can take alot of space using it. This is an example of it!");
+	kvRules.GoBack();
+	
+	kvRules.JumpToKey("rule3", true);
+	kvRules.SetString("rule",			"Each rule needs 1 section with a 'rule' key.");
+	kvRules.GoBack();
+	
+	kvRules.JumpToKey("lelele", true);
+	kvRules.SetString("rule",			"Section names don't have to be different");
+	kvRules.GoBack();
+	
+	kvRules.JumpToKey("Gr8B8M8", true);
+	kvRules.SetString("rule",			"And you can use any name you want.");
+	kvRules.GoBack();
+	
+	kvRules.Rewind();
+	kvRules.ExportToFile(rulesKV);
+	kvRules.Close();
+}
+
+public void CreateAdverts()
+{
+	File hFile = OpenFile(advertsKV, "w");
+	hFile.Close();
+	kvAdverts = new KeyValues("Advertisements");
+	kvAdverts.ImportFromFile(advertsKV);
+	kvAdverts.JumpToKey("Chat Ad", true);
+	kvAdverts.SetString("chat",			"Example of a chat advert.");
+	kvAdverts.GoBack();
+	
+	kvAdverts.JumpToKey("Top Ad", true);
+	kvAdverts.SetString("top",			"Example of a top advert");
+	kvAdverts.GoBack();
+	
+	kvAdverts.JumpToKey("Center Ad", true);
+	kvAdverts.SetString("center",			"Example of a center advert that won't show for generic admins");
+	kvAdverts.SetString("flags",			"b");
+	kvAdverts.GoBack();
+	
+	kvAdverts.JumpToKey("Menu Ad", true);
+	kvAdverts.SetString("menu",			"Example of a menu advert\n across multiple lines");
+	kvAdverts.GoBack();
+	
+	kvAdverts.JumpToKey("Hint Ad", true);
+	kvAdverts.SetString("hint",			"Example of a hint advert");
+	kvAdverts.GoBack();
+	
+	kvAdverts.JumpToKey("Multi Ad", true);
+	kvAdverts.SetString("top",			"This will be shown at {crimson}top");
+	kvAdverts.SetString("chat",			"{crimson} This will be shown in chat with other {yellow} colors.");
+	kvAdverts.GoBack();
+	
+	kvAdverts.Rewind();
+	kvAdverts.ExportToFile(advertsKV);
+	kvAdverts.Close();
 }
 
 public void UpdateConfig(char section[32], char type[32], char value[32])
@@ -136,14 +214,22 @@ public void ReadFromConfig()
 	kvConfig.ImportFromFile(configFileKV);
 
 	kvConfig.JumpToKey("Chat Settings", false);
+	kvConfig.GetString("soccer_prefix", prefix, sizeof(prefix), "Soccer Mod");
+	kvConfig.GetString("soccer_textcolor", textcolor, sizeof(textcolor), "lightgreen");
+	kvConfig.GetString("soccer_prefixcolor", prefixcolor, sizeof(prefixcolor), "green");
 	DeadChatMode			= kvConfig.GetNum("soccer_deadchat_mode", 0);
 	DeadChatVis				= kvConfig.GetNum("soccer_deadchat_visibility", 0);
-	kvConfig.GetString("soccer_chat_prefix", prefix, sizeof(prefix));
+	kvConfig.GoBack();
+	
+	kvConfig.JumpToKey("Adverts Settings", false);
+	advertEnabled			= kvConfig.GetNum("soccer_adverts_enabled",	0);
+	advertInterval			= kvConfig.GetFloat("soccer_adverts_interval",	30.0);
 	kvConfig.GoBack();
 	
 	kvConfig.JumpToKey("Misc Settings", true);
 	damageSounds			= kvConfig.GetNum("soccer_damagesounds", 0);
 	dissolveSet				= kvConfig.GetNum("soccer_dissolver", 2);
+	kvConfig.GetString("soccer_command", commandString, sizeof(commandString), "menu");			
 	kvConfig.GoBack();
 	
 	kvConfig.JumpToKey("Sprint Settings", true);

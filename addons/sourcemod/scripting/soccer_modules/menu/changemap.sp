@@ -28,7 +28,7 @@ public void OpenMenuMapsChange(int client)
 	}
 	else
 	{
-		PrintToChat(client, "[%s] Allowed maps list is empty", prefix);
+		CPrintToChat(client, "{%s}[%s] Allowed maps list is empty", prefixcolor, prefix);
 		OpenMenuAdmin(client);
 	}
 }
@@ -49,7 +49,7 @@ public int MenuHandlerMapsChange(Menu menu, MenuAction action, int client, int c
 
 		for (int player = 1; player <= MaxClients; player++)
 		{
-			if (IsClientInGame(player) && IsClientConnected(player)) PrintToChat(player, "[%s]%N has changed the map to %s", prefix, client, map);
+			if (IsClientInGame(player) && IsClientConnected(player)) CPrintToChat(player, "{%s}[%s] {%s}%N has changed the map to %s", prefixcolor, prefix, textcolor, client, map);
 			if(GetClientMenu(player) != MenuSource_None )	
 			{
 				CancelClientMenu(player,false);
