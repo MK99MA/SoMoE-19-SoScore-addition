@@ -8,7 +8,7 @@ public void OpenMenuColorlist(int client)
 	menu.AddItem("red", "red, orange & pink");
 	menu.AddItem("yellow", "yellow, green & brown");
 
-	menu.ExitBackButton = true;
+	if(menuaccessed[client] == true) menu.ExitBackButton = true;
 	menu.Display(client, MENU_TIME_FOREVER);
 }
 
@@ -25,7 +25,11 @@ public int 	MenuHandlerColorlist(Menu menu, MenuAction action, int client, int c
 		else if (StrEqual(menuItem, "yellow"))				OpenMenuColorlistYellow(client); 
 
 	}
-	//else if (action == MenuAction_Cancel && choice == -6)   OpenMenuSoccer(client);
+	else if (action == MenuAction_Cancel && choice == -6)   
+	{
+		menuaccessed[client] = false;
+		OpenMenuSettings(client);
+	}
 	else if (action == MenuAction_End)                      menu.Close();
 }
 

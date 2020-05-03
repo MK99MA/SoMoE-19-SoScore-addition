@@ -23,6 +23,7 @@ public void OpenMenuSettings(int client)
 	menu.AddItem("skinsmenu", "Skins");
 	menu.AddItem("damagesound", DamageString);
 	menu.AddItem("dissolve", DissolveString);
+	menu.AddItem("colors", "Colorlist");
 	if (shoutplugin != INVALID_HANDLE)
 	{
 		if(CheckCommandAccess(client, "generic_admin", ADMFLAG_GENERIC, true)) menu.AddItem("shoutplug", "Shout Plugin");
@@ -43,6 +44,11 @@ public int MenuHandlerSettings(Menu menu, MenuAction action, int client, int cho
 		else if (StrEqual(menuItem, "skinsmenu"))		OpenSkinsMenu(client);
 		else if (StrEqual(menuItem, "shoutplug"))		FakeClientCommandEx(client, "sm_shoutset");
 		else if (StrEqual(menuItem, "allowed"))			OpenMenuMaps(client);
+		else if (StrEqual(menuItem, "colors"))			
+		{
+			menuaccessed[client] = true;
+			OpenMenuColorlist(client);
+		}
 		else if(StrEqual(menuItem, "damagesound")) 
 		{
 			if(damageSounds == 0)

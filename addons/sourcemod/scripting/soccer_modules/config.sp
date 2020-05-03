@@ -120,7 +120,7 @@ public void CreateAdverts()
 	
 	kvAdverts.JumpToKey("Multi Ad", true);
 	kvAdverts.SetString("top",			"This will be shown at {crimson}top");
-	kvAdverts.SetString("chat",			"{crimson} This will be shown in chat with other {yellow} colors.");
+	kvAdverts.SetString("chat",			"{crimson} This will be shown in chat with other {yellow}colors.");
 	kvAdverts.GoBack();
 	
 	kvAdverts.Rewind();
