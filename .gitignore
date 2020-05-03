@@ -19,6 +19,7 @@
 
 !/addons/sourcemod/scripting/soccer_modules.sp
 
+!/addons/sourcemod/scripting/include/morecolors.inc
 !/addons/sourcemod/scripting/soccer_modules
 !/addons/sourcemod/scripting/soccer_modules/*
 
