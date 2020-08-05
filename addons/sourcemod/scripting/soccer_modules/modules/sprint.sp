@@ -90,13 +90,23 @@ public Action Command_StartSprint(int client, int args)
 
 			if (iP_SETTINGS[client] & PLAYER_TIMER)
 			{
+				/*if(h_SPRINT_REFILL[client] != INVALID_HANDLE) delete h_SPRINT_REFILL[client];	*/
+				
 				float time = fSPRINT_TIME;
 				
 				DataPack pack = new DataPack();
-				h_SPRINT_DURATION[client] = CreateDataTimer(0.1, SprintHud, pack, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE|TIMER_DATA_HNDL_CLOSE);
-				pack.WriteCell(client);
-				pack.WriteFloat(time);
-				pack.WriteString("Sprinting");
+				if (pack != INVALID_HANDLE)
+				{
+					if (IsValidClient(client))
+					{
+						h_SPRINT_DURATION[client] = CreateDataTimer(0.1, SprintHud, pack, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE|TIMER_DATA_HNDL_CLOSE);
+						pack.WriteCell(client);
+						pack.WriteFloat(time);
+						pack.WriteString("Sprinting");
+					}
+					else CloseHandle(pack);
+				}
+				else CloseHandle(pack);
 			}
 			//---- 
 
@@ -110,6 +120,7 @@ public Action Command_StartSprint(int client, int args)
 public Action SprintHud(Handle timer, DataPack pack)
 {
 	char sBuf[32]
+
 	pack.Reset();
 	int client = pack.ReadCell();
 	float time = pack.ReadFloat();
@@ -118,7 +129,7 @@ public Action SprintHud(Handle timer, DataPack pack)
 	char cdBuffer[32];
 	SetHudTextParams(x_val[client], y_val[client], 0.1, red_val[client], green_val[client], blue_val[client], 255);
 	
-	if(time > 0.0)
+	if(time > 0.0 && IsValidClient(client))
 	{
 		if(StrEqual(sBuf, "Sprinting"))Format(cdBuffer, sizeof(cdBuffer), "Sprinting: %.1f ", time);
 		else if(StrEqual(sBuf, "Cooldown"))Format(cdBuffer, sizeof(cdBuffer), "Cooldown: %.1f ", time);
@@ -130,14 +141,20 @@ public Action SprintHud(Handle timer, DataPack pack)
 		pack.WriteFloat(time);
 		pack.WriteString(sBuf);
 	}
-	else if(time == 0.0)
+	else if(time == 0.0 && IsValidClient(client))
 	{
 		if(h_SPRINT_DURATION[client] != INVALID_HANDLE)
 		{
 			delete h_SPRINT_DURATION[client];
 		}
-		CloseHandle(pack);
 		ShowHudText(client, 5, "");	
+	}
+	else if(!IsValidClient(client))
+	{
+		if(h_SPRINT_DURATION[client] != INVALID_HANDLE)
+		{
+			delete h_SPRINT_DURATION[client];
+		}
 	}
 	
 	return;

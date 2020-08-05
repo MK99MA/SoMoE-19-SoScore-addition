@@ -1,7 +1,7 @@
 // **************************************************************************************************************
 // ************************************************** DEFINES ***************************************************
 // **************************************************************************************************************
-#define PLUGIN_VERSION "1.1.0"
+#define PLUGIN_VERSION "1.2.0"
 #define UPDATE_URL "https://raw.githubusercontent.com/MK99MA/SoMoE-19-SoScore-addition/master/addons/sourcemod/updatefile.txt"
 
 // **************************************************************************************************************
@@ -200,4 +200,11 @@ public void AddDirToDownloads(char path[PLATFORM_MAX_PATH])
 		dir.Close();
 	}
 	else PrintToServer("[%s] Can't add folder %s to the downloads", prefix, path);
+}
+
+// *********************************************** VALIDATION ********************************************************
+
+stock bool IsValidClient(int client, bool bAlive = false)
+{
+	return (client >= 1 && client <= MaxClients && IsClientConnected(client) && IsClientInGame(client) && !IsClientSourceTV(client));
 }
