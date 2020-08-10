@@ -1,4 +1,4 @@
-# SoMoE-19 SoScore Complementary - Current Version: 1.1.0
+# SoMoE-19 SoScore Complementary - Current Version: 1.2.0
 A "light" Version of my SoMoE-19 plugin based on Marco Boogers SourceMod plugin to be used together with Forlix SoScore & SoStats.  
 Just like the "full" version it is aimed at Counter-Strike:Source soccer servers, so no CS:GO support for now.  
 The idea behind it was to function as a complimentary plugin to the above mentioned plugins, which are great for public soccer servers but are lacking some features on its own.  
